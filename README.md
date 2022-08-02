@@ -99,8 +99,8 @@ Pull a node image
 docker pull node
 ```
 
-Run a detached node container
+Run a detached node container with a volume and a work dir.
 
 ```
-docker run -d -p 3000:3000 -v $(pwd)/express:/var/www node npm start -prefix /var/www
+docker run -d -p 3000:3000 -v $(pwd)/express:/var/www -w /var/www node npm start
 ```
