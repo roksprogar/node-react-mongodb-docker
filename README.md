@@ -79,3 +79,28 @@ Start a new container with a volume in the current dir.
 ```
 docker run -d -p 27017:27017 -v $(pwd)/mongodb:/data/db mongo
 ```
+
+# Sample express app
+
+Create an express app
+
+```
+mkdir express
+cd express
+npx express-generator
+npm install
+# npm start - starts a server on localhost:3000
+cd ..
+```
+
+Pull a node image
+
+```
+docker pull node
+```
+
+Run a detached node container
+
+```
+docker run -d -p 3000:3000 -v $(pwd)/express:/var/www node npm start -prefix /var/www
+```
