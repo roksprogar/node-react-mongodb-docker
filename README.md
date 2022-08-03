@@ -104,3 +104,17 @@ Run a detached node container with a volume and a work dir.
 ```
 docker run -d -p 3000:3000 -v $(pwd)/express:/var/www -w /var/www node npm start
 ```
+
+# Dockerfile
+
+Build and tag the image from a dockerfile in the current dir.
+
+```
+docker build -t my_node_image .
+```
+
+Run a container off of the image.
+
+```
+docker run -d -p 3000:3000 my_node_image
+```
