@@ -6,6 +6,6 @@ router.get('/notes', notes.findAllNotes);
 router.get('/notes/:id', notes.findOneNote);
 router.post('/notes', notes.createNote);
 router.delete('/notes/:id', notes.deleteOneNote);
-router.patch('/notes', () => {});
+router.patch('/notes/:id', notes.updateOneNote);
 
 export default router;

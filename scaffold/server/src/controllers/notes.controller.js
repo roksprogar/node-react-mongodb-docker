@@ -90,3 +90,33 @@ export async function deleteOneNote(request, response) {
     success: true,
   });
 }
+
+export async function updateOneNote(request, response) {
+  const { id } = request.params;
+  const isValid = mongoose.Types.ObjectId.isValid(id);
+  if (!request.body || !isValid) {
+    response.status(400).send({
+      message: 'Invalid request',
+      success: false,
+    });
+  }
+
+  let data;
+  try {
+    data = await Note.findByIdAndUpdate(id, {
+      title: request.body.title,
+      description: request.body.description,
+    });
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({
+      message: 'Something went wrong',
+      success: false,
+    });
+  }
+
+  response.send({
+    data,
+    success: true,
+  });
+}
