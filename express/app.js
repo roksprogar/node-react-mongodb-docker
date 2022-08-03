@@ -6,6 +6,26 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { MongoClient } = require('mongodb');
+
+const uri = 'mongodb://localhost:27017';
+
+const client = new MongoClient(uri);
+
+async function runMongo() {
+  let isConnected = false;
+  try {
+    await client.connect();
+    await client.db('admin').command({ ping: 1 });
+    isConnected = true;
+    console.log('Connected to mongo!');
+  } catch (error) {
+    console.log('Something went wrong!', error);
+  } finally {
+    await client.close();
+    return isConnected;
+  }
+}
 
 var app = express();
 
@@ -21,14 +41,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.get('/test', async (req, res, next) => {
+  const result = await runMongo();
+  res.send(`MongoDb is ${result ? 'connected' : 'not connected'}!`);
+});
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

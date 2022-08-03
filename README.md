@@ -62,10 +62,10 @@ Pull a mongodb image.
 docker pull mongo
 ```
 
-Run a mongodb container.
+Run a mongodb container and name it.
 
 ```
-docker run -d -p 27017:27017 mongo
+docker run -d -p 27017:27017 --name mongodb mongo
 ```
 
 Stop and remove a running docker container.
