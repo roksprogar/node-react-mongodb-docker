@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     // console.log('Request on address: ', API_BASE_ADDRESS);
     const fetchData = async () => {
-      const result = await axios.get(`${API_BASE_ADDRESS}/`);
+      const result = await axios.get(`${API_BASE_ADDRESS}/api/`);
       setResponse(result.data);
     };
     fetchData();
@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     const checkHeath = async () => {
-      const result = await axios.get(`${API_BASE_ADDRESS}/healthcheck`);
+      const result = await axios.get(`${API_BASE_ADDRESS}/api/healthcheck`);
       setMongoHealth(result.data.status);
     };
     const checkStatusTimer = setTimeout(() => checkHeath(), 1000);
