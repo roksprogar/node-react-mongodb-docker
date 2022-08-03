@@ -66,3 +66,27 @@ export async function createNote(request, response) {
     data,
   });
 }
+
+export async function deleteOneNote(request, response) {
+  const { id } = request.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    response.status(400).send({
+      message: 'invalid request',
+      success: false,
+    });
+  }
+  let data;
+  try {
+    data = await Note.deleteOne({ _id: id });
+  } catch (error) {
+    console.errorg(error);
+    response.status(500).send({
+      message: 'Something went wrong',
+      success: false,
+    });
+  }
+  response.send({
+    data,
+    success: true,
+  });
+}
