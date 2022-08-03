@@ -103,10 +103,14 @@ export async function updateOneNote(request, response) {
 
   let data;
   try {
-    data = await Note.findByIdAndUpdate(id, {
-      title: request.body.title,
-      description: request.body.description,
-    });
+    data = await Note.findByIdAndUpdate(
+      id,
+      {
+        title: request.body.title,
+        description: request.body.description,
+      },
+      { new: true }
+    );
   } catch (error) {
     console.log(error);
     response.status(500).send({
