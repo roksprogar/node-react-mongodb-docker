@@ -15,7 +15,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
-  res.send('Hello from expressly!');
+  res.send('Hello from express!');
 });
 
 app.listen(PORT, () => {

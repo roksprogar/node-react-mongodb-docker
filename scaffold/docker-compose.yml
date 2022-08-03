@@ -22,7 +22,7 @@ services:
       context: ./server
     command: npm start
     volumes:
-      - ./backend/src:/usr/app/src
+      - ./server/src:/usr/app/src
     # Still need to expose the ports to our local machine.
     ports:
       - "3001:3001"
