@@ -8,8 +8,6 @@ services:
     command: npm start
     volumes:
       - ./client/src:/usr/app/src
-    ports:
-      - "3000:3000"
     # Two settings for react hot reload.
     tty: true
     stdin_open: true
@@ -24,12 +22,10 @@ services:
     volumes:
       - ./server/src:/usr/app/src
     # Still need to expose the ports to our local machine.
-    ports:
-      - "3001:3001"
     environment:
       - PORT=3001
       - CORS_HOST=localhost
-      - CORS_PORT=3000
+      - CORS_PORT=80
       - MONGO_HOST=api_mongo
       - MONGO_PORT=27017
 
@@ -37,8 +33,6 @@ services:
     image: mongo:latest
     volumes:
       - mongodb_api:/data/db
-    ports:
-      - "27017:27017"
 
   nginx:
     image: nginx:stable-alpine
