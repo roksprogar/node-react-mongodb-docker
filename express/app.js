@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://localhost:27017';
+const uri = 'mongodb://mongodb:27017';
 
 const client = new MongoClient(uri);
 
@@ -20,6 +20,7 @@ async function runMongo() {
     isConnected = true;
     console.log('Connected to mongo!');
   } catch (error) {
+    isConnected = false;
     console.log('Something went wrong!', error);
   } finally {
     await client.close();

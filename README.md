@@ -110,11 +110,11 @@ docker run -d -p 3000:3000 -v $(pwd)/express:/var/www -w /var/www node npm start
 Build and tag the image from a dockerfile in the current dir.
 
 ```
-docker build -t my_node_image .
+docker build -t nodeapp .
 ```
 
-Run a container off of the image.
+Run a container off of the image and "link" it to the mongodb container.
 
 ```
-docker run -d -p 3000:3000 my_node_image
+docker run -d -p 3000:3000 --name nodeapp --link mongodb nodeapp
 ```
