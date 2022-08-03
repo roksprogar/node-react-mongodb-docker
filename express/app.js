@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://mongodb:27017';
+const uri = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`;
 
 const client = new MongoClient(uri);
 
