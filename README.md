@@ -139,3 +139,41 @@ Run the containers on the network
 docker run -ti -p 27017:27017 --name mongodb --net=mynetwork -v $(pwd)/mongodb:/data/db mongo
 docker run -ti -p 3000:3000 --name nodeapp --net=mynetwork nodeapp
 ```
+
+# docker-compose
+
+Build the images.
+
+```
+docker compose build
+```
+
+Build the images and run the containers as detached.
+
+```
+docker compose up -d --build
+```
+
+Stop the running containers without removing them.
+
+```
+docker compose stop
+```
+
+Start the stopped containers.
+
+```
+docker compose start
+```
+
+Stop the running containers and remove them.
+
+```
+docker compose down
+```
+
+Show the logs.
+
+```
+docker compose logs
+```

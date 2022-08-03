@@ -50,7 +50,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.get('/test', async (req, res, next) => {
   const result = await runMongo();
-  res.send(`MongoDb is ${result ? 'connected' : 'not connected'}!`);
+  res.send(`MongoDb is ${result ? 'connected' : 'not connected'}!!!`);
 });
 
 // catch 404 and forward to error handler
