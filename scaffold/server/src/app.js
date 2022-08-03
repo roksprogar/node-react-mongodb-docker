@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import healthCheck from './routers/health.routers.js';
+import initRouter from './routers/index.js';
 
 const MONGO_HOST = process.env.MONGO_HOST || 'localhost';
 const MONGO_PORT = process.env.MONGO_PORT || 27017;
@@ -14,7 +14,7 @@ db.on('error', console.error.bind(console, 'MongoDb connection error: '));
 
 const app = express();
 
-app.use(healthCheck);
+initRouter(app);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
