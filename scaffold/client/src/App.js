@@ -25,7 +25,8 @@ function App() {
       const result = await axios.get(`${API_BASE_ADDRESS}/api/healthcheck`);
       setMongoHealth(result.data.status);
     };
-    const checkStatusTimer = setTimeout(() => checkHeath(), 1000);
+    checkHeath();
+    const checkStatusTimer = setTimeout(() => checkHeath(), 10000);
     return () => {
       clearInterval(checkStatusTimer);
     };
