@@ -1,5 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+
+const MONGO_HOST = process.env.MONGO_HOST || 'localhost';
+const MONGO_PORT = process.env.MONGO_PORT || 27017;
+const MONGO_CONN = `mongodb://${MONGO_HOST}:${MONGO_PORT}`;
+
+mongoose.connect(MONGO_CONN);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 const PORT = process.env.PORT || 3002;
 const CORS_HOST = process.env.CORS_HOST || 'localhost';
