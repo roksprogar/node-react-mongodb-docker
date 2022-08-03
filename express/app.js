@@ -12,6 +12,12 @@ const uri = 'mongodb://mongodb:27017';
 
 const client = new MongoClient(uri);
 
+async function connectToMongo() {
+  client.connect();
+}
+
+connectToMongo();
+
 async function runMongo() {
   let isConnected = false;
   try {
@@ -23,7 +29,7 @@ async function runMongo() {
     isConnected = false;
     console.log('Something went wrong!', error);
   } finally {
-    await client.close();
+    // await client.close();
     return isConnected;
   }
 }
