@@ -7,8 +7,12 @@ function App() {
   const [response, setResponse] = useState('');
 
   useEffect(() => {
+    const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
+    const API_PORT = process.env.REACT_APP_API_PORT || 3002;
+    const API_BASE_ADDRESS = `http://${API_HOST}:${API_PORT}`;
+    // console.log('Request on address: ', API_BASE_ADDRESS);
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:3001');
+      const result = await axios.get(`${API_BASE_ADDRESS}/`);
       setResponse(result.data);
     };
     fetchData();

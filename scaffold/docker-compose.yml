@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+
+  client:
+    build:
+      context: ./client
+    command: npm start
+    volumes:
+      - ./client/src:/usr/app/src
+    ports:
+      - "3000:3000"
+    # Two settings for react hot reload.
+    tty: true
+    stdin_open: true
+    environment:
+      - REACT_APP_API_HOST=localhost
+      - REACT_APP_API_PORT=3001
+
+  api:
+    build:
+      context: ./server
+    command: npm start
+    volumes:
+      - ./backend/src:/usr/app/src
+    # Still need to expose the ports to our local machine.
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - CORS_HOST=localhost
+      - CORS_PORT=3000
