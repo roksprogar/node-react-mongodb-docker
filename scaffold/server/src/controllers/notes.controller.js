@@ -1,4 +1,5 @@
 import Note from '../models/notes.model.js';
+import mongoose from 'mongoose';
 
 export async function findAllNotes(request, response) {
   let data;
@@ -11,7 +12,29 @@ export async function findAllNotes(request, response) {
       success: false,
     });
   }
-  response.send(data);
+  response.send({ data, success: true });
+}
+
+export async function findOneNote(request, response) {
+  const { id } = request.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    response.status(500).send({
+      message: 'Invalid request!',
+      success: false,
+    });
+  }
+
+  let data;
+  try {
+    data = await Note.findById(id);
+  } catch (error) {
+    console.error(error);
+    response.status(500).send({
+      message: 'Something went wrong!',
+      status: false,
+    });
+  }
+  response.send({ data, success: true });
 }
 
 export async function createNote(request, response) {
