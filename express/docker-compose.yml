@@ -7,8 +7,8 @@ services:
       context: .
     ports:
       - "3000:3000"
-    networks:
-      - mynetwork
+    # networks:
+    #   - mynetwork
     depends_on:
       - mongodb
     environment:
@@ -17,9 +17,9 @@ services:
       
   mongodb:
     image: mongo
-    networks:
-      - mynetwork
+    # networks:
+    #   - mynetwork
 
-networks:
-  mynetwork:
-    driver: bridge
+# networks:
+#   mynetwork:
+#     driver: bridge
