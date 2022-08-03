@@ -1,7 +1,19 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [response, setResponse] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('http://localhost:3001');
+      setResponse(result.data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +27,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          The response is: {response}
         </a>
       </header>
     </div>
