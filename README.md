@@ -177,3 +177,19 @@ Show the logs.
 ```
 docker compose logs
 ```
+
+# Scaffold
+
+Build the docker image for the react app
+
+```
+cd scaffold/client
+docker build -t reactapp .
+```
+
+Build the docker image for the node app
+
+```
+cd scaffold/server
+docker build -t nodeapp .
+```
