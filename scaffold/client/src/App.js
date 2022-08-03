@@ -4,19 +4,32 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
+  const API_PORT = process.env.REACT_APP_API_PORT || 3002;
+  const API_BASE_ADDRESS = `http://${API_HOST}:${API_PORT}`;
+
   const [response, setResponse] = useState('');
+  const [mongoHealth, setMongoHealth] = useState('fail');
 
   useEffect(() => {
-    const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
-    const API_PORT = process.env.REACT_APP_API_PORT || 3002;
-    const API_BASE_ADDRESS = `http://${API_HOST}:${API_PORT}`;
     // console.log('Request on address: ', API_BASE_ADDRESS);
     const fetchData = async () => {
       const result = await axios.get(`${API_BASE_ADDRESS}/`);
       setResponse(result.data);
     };
     fetchData();
-  }, []);
+  }, [API_BASE_ADDRESS]);
+
+  useEffect(() => {
+    const checkHeath = async () => {
+      const result = await axios.get(`${API_BASE_ADDRESS}/healthcheck`);
+      setMongoHealth(result.data.status);
+    };
+    const checkStatusTimer = setTimeout(() => checkHeath(), 1000);
+    return () => {
+      clearInterval(checkStatusTimer);
+    };
+  }, [API_BASE_ADDRESS]);
 
   return (
     <div className="App">
@@ -33,6 +46,7 @@ function App() {
         >
           The response is: {response}
         </a>
+        <h4>The status of the MongoDb connection is: {mongoHealth}</h4>
       </header>
     </div>
   );
