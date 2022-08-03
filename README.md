@@ -102,7 +102,7 @@ docker pull node
 Run a detached node container with a volume and a work dir.
 
 ```
-docker run -d -p 3000:3000 -v $(pwd)/express:/var/www -w /var/www node npm start
+docker run -ti -p 3000:3000 -v $(pwd)/express:/var/www -w /var/www node npm start
 ```
 
 # Dockerfile
@@ -116,5 +116,26 @@ docker build -t nodeapp .
 Run a container off of the image and "link" it to the mongodb container.
 
 ```
-docker run -d -p 3000:3000 --name nodeapp --link mongodb nodeapp
+docker run -ti -p 3000:3000 --name nodeapp --link mongodb nodeapp
+```
+
+# Docker networks
+
+Create a docker network
+
+```
+docker network create --driver bridge mynetwork
+```
+
+List all docker networks
+
+```
+docker network ls
+```
+
+Run the containers on the network
+
+```
+docker run -ti -p 27017:27017 --name mongodb --net=mynetwork -v $(pwd)/mongodb:/data/db mongo
+docker run -ti -p 3000:3000 --name nodeapp --net=mynetwork nodeapp
 ```
