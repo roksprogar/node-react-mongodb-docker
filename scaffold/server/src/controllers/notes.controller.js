@@ -1,5 +1,19 @@
 import Note from '../models/notes.model.js';
 
+export async function findAllNotes(request, response) {
+  let data;
+  try {
+    data = await Note.find();
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({
+      message: 'Something went wrong',
+      success: false,
+    });
+  }
+  response.send(data);
+}
+
 export async function createNote(request, response) {
   if (!request.body) {
     response.status(400).send({
