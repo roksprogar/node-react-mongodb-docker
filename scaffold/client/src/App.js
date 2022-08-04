@@ -3,7 +3,7 @@ import './App.scss';
 import Navbar from './components/Navbar';
 import Notes from './components/Notes';
 import M from 'materialize-css';
-import Modal from './components/Modal';
+import ModalNotes from './components/ModalNotes';
 
 function App() {
   useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
           <i className="material-icons">add</i>
         </a>
       </div>
-      <Modal />
+      <ModalNotes />
     </div>
   );
 }
