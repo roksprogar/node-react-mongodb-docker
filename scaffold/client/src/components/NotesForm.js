@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import M from 'materialize-css';
+import StateContext from '../StateContext';
 
 function NotesForm() {
   const _titleInput = useRef(null);
   const _descArea = useRef(null);
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const context = useContext(StateContext);
 
   useEffect(() => {
     M.CharacterCounter.init(_titleInput.current);
@@ -26,8 +26,8 @@ function NotesForm() {
                 type="text"
                 data-length="15"
                 ref={_titleInput}
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
+                value={context.title}
+                onChange={(event) => context.setTitle(event.target.value)}
               />
               <label htmlFor="input_text">Title</label>
             </div>
@@ -39,8 +39,8 @@ function NotesForm() {
                 className="materialize-textarea"
                 data-length="150"
                 ref={_descArea}
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
+                value={context.description}
+                onChange={(event) => context.setDescription(event.target.value)}
               ></textarea>
               <label htmlFor="text_area">Description</label>
             </div>
