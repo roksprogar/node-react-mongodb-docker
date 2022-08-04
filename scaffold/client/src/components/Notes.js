@@ -7,11 +7,16 @@ function Notes() {
   useEffect(() => {
     async function fetchNotes() {
       const { data } = await axios.get('http://localhost/api/notes');
-      console.log('data', data.data);
       setNotes(data.data);
     }
     fetchNotes();
   }, []);
+
+  async function handleDelete(id) {
+    const { data } = await axios.delete(`http://localhost/api/notes/${id}`);
+    const newNotes = notes.filter((note) => note._id !== id);
+    setNotes(newNotes);
+  }
 
   return (
     <section>
@@ -19,11 +24,7 @@ function Notes() {
         <div className="row">
           {notes &&
             notes.map((note) => (
-              <Note
-                key={note._id}
-                title={note.title}
-                description={note.description}
-              />
+              <Note key={note._id} note={note} handleDelete={handleDelete} />
             ))}
         </div>
       </div>
