@@ -1,41 +1,49 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './App.scss';
 import Navbar from './components/Navbar';
 import Notes from './components/Notes';
+import M from 'materialize-css';
 
 function App() {
-  // const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
-  // const API_PORT = process.env.REACT_APP_API_PORT || 3002;
-  // const API_BASE_ADDRESS = `http://${API_HOST}:${API_PORT}`;
+  const _noteModal = useRef(null);
 
-  // const [response, setResponse] = useState('');
-  // const [mongoHealth, setMongoHealth] = useState('fail');
-
-  // useEffect(() => {
-  //   // console.log('Request on address: ', API_BASE_ADDRESS);
-  //   const fetchData = async () => {
-  //     const result = await axios.get(`${API_BASE_ADDRESS}/api/`);
-  //     setResponse(result.data);
-  //   };
-  //   fetchData();
-  // }, [API_BASE_ADDRESS]);
-
-  // useEffect(() => {
-  //   const checkHeath = async () => {
-  //     const result = await axios.get(`${API_BASE_ADDRESS}/api/healthcheck`);
-  //     setMongoHealth(result.data.status);
-  //   };
-  //   checkHeath();
-  //   const checkStatusTimer = setTimeout(() => checkHeath(), 10000);
-  //   return () => {
-  //     clearInterval(checkStatusTimer);
-  //   };
-  // }, [API_BASE_ADDRESS]);
+  useEffect(() => {
+    M.AutoInit();
+    M.Modal.init(_noteModal.current);
+    return () => {};
+  }, []);
 
   return (
     <div className="App">
       <Navbar />
       <Notes />
+      <div className="fixed-action-btn">
+        <a
+          href="#modal-add-note"
+          className="btn-floating btn-large waves-effect waves-light red modal-trigger"
+        >
+          <i className="material-icons">add</i>
+        </a>
+      </div>
+      <div id="modal-add-note" className="modal" ref={_noteModal}>
+        <div className="modal-content">
+          <h4>Create a new note</h4>
+        </div>
+        <div className="modal-footer">
+          <a
+            href="#"
+            className="modal-action modal-close waves-effect btn-flat red white-text"
+          >
+            Cancel
+          </a>{' '}
+          <a
+            href="#"
+            className="modal-action modal-close waves-effect btn-flat green white-text"
+          >
+            Ok
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
