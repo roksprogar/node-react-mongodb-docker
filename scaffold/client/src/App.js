@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Navbar from './components/Navbar';
+import Notes from './components/Notes';
 
 function App() {
   // const API_HOST = process.env.REACT_APP_API_HOST || 'localhost';
@@ -34,6 +35,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      <Notes />
     </div>
   );
 }
